@@ -16,17 +16,25 @@ class ViewController: UIViewController {
         URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
             guard 
                 let data = data,
-                let response,
                 error == nil
             else{
                 return
             }
-         //   let decoder = JSONDecoder()
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
             // Обработка данных
-            let str = String(data: data, encoding: .utf8)
-            print("Полученные данные : \(str ?? "")")
+            let model = try! decoder.decode([BeerDTO].self, from: data)
+            print(model)
         }).resume()
-        // клажуры (лямбда функци, completionHandler) - сохранение функций в переменных и передача функции в качестве аргумента. Нужно для того, чтобы не тормозить код, который будет выполняься после отправки запроса на сервер. Он принимает 3 аргумента из самой системы, ничего не возвращает. // с 16 строки
+//         клажуры (лямбда функци, completionHandler) - сохранение функций в переменных и передача функции в качестве аргумента. Нужно для того, чтобы не тормозить код, который будет выполняься после отправки запроса на сервер. Он принимает 3 аргумента из самой системы, ничего не возвращает. // с 16 строки
     }
 }
 
+struct BeerDTO: Decodable{
+    let id: Int
+    let name: String
+    let tagline: String
+    let imageUrl: URL
+    // чекнуть информацию про кодинг кейс, что такое camel и snake case
+    
+}
