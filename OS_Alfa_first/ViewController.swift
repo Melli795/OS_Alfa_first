@@ -12,8 +12,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = . systemPink
-        let url: URL = URL(string: "https://api.punkapi.com/v2/beers")! // принудительная распаковка используется только в тестах
-        URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
+        let url: URL = URL(string: S"https://api.punkapi.com/v2/beers")! // принудительная распаковка используется только в тестах
+        URLSession.shared.dataTask(with: url, comptionHandler: { data, response, error in
             guard 
                 let data = data,
                 error == nil
